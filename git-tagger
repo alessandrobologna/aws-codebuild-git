@@ -1,0 +1,13 @@
+#!/bin/bash
+# Argument to the script is a valid ssh key for github
+
+if [ -n "$CODEBUILD_GIT_TAG" ] && [ "${CODEBUILD_PULL_REQUEST}" = "false" ] && [ "${CODEBUILD_GIT_BRANCH}" = "master" ]
+then
+	mkdir -p ~/.ssh/ && ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts 
+	GIT_TAG=v$(date "+%Y%m%d-%H%M%S")
+	git remote set-url origin $(echo $CODEBUILD_SOURCE_REPO_URL | sed 's/https:\/\/github.com\//git@github.com:/g')
+	echo "$1" > /tmp/key.pem && chmod 600 /tmp/key.pem
+	eval $(ssh-agent) && ssh-add /tmp/key.pem 
+	git tag $GIT_TAG -f -a -m "${CODEBUILD_BUILD_URL}"
+	git push -q --tags
+fi

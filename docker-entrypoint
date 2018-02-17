@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [[ -n "$@" ]]
+then 
+	exec $@
+else
+	exec /bin/bash
+fi
