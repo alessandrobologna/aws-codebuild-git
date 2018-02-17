@@ -1,7 +1,7 @@
 #!/bin/bash
 # Argument to the script is a valid ssh key for github, create a tag if it's a push to master (and not a tag)
 
-if [ -n "$CODEBUILD_GIT_TAG" ] && [ "${CODEBUILD_PULL_REQUEST}" = "false" ] && [ "${CODEBUILD_GIT_BRANCH}" = "master" ]
+if [ -z "$CODEBUILD_GIT_TAG" ] && [ "${CODEBUILD_PULL_REQUEST}" = "false" ] && [ "${CODEBUILD_GIT_BRANCH}" = "master" ]
 then
 	mkdir -p ~/.ssh/ && ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts 
 	GIT_TAG=v$(date "+%Y%m%d-%H%M%S")
