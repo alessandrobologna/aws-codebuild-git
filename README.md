@@ -58,15 +58,18 @@ As an example workflow, you could use a similar script to deploy to dev, qa and 
 ```bash
 #!/bin/bash
 
-if [[ "master" = "$CODEBUILD_GIT_BRANCH" ]] && [[ "$CODEBUILD_GIT_TAG" =~ ^v[0-9]{8}-[0-9]{6} ]]
+if [[ "master" = "$CODEBUILD_GIT_BRANCH" ]] 
 then
-	echo "building and deploying to PROD"
-else
-	if [[ "$CODEBUILD_PULL_REQUEST" == "false" ]]
+	if [[ "$CODEBUILD_GIT_TAG" =~ ^v[0-9]{8}-[0-9]{6} ]]
 	then
-		echo "building and deploying to DEV"
-	else
-		echo "building and deploying to QA"
+		echo "Deploying $CODEBUILD_GIT_TAG to PROD"
+	else 
+	  echo "Merged to master, will just tag this release"
 	fi
+elif [[ "$CODEBUILD_PULL_REQUEST" == "false" ]]
+then
+  echo "Deploying branch $CODEBUILD_GIT_BRANCH to DEV"
+else
+  echo "Deploying PR/$CODEBUILD_PULL_REQUEST to QA"
 fi
 ```
