@@ -62,14 +62,15 @@ if [[ "master" = "$CODEBUILD_GIT_BRANCH" ]]
 then
 	if [[ "$CODEBUILD_GIT_TAG" =~ ^v[0-9]{8}-[0-9]{6} ]]
 	then
-		echo "Deploying $CODEBUILD_GIT_TAG to PROD"
+		echo "==> Deploying $CODEBUILD_GIT_TAG to PROD"
 	else 
-	  echo "Merged to master, will just tag this release"
+	  echo "==> Merged to master, will just tag this release"
 	fi
 elif [[ "$CODEBUILD_PULL_REQUEST" == "false" ]]
 then
-  echo "Deploying branch $CODEBUILD_GIT_BRANCH to DEV"
+  echo "==> Deploying branch $CODEBUILD_GIT_BRANCH to DEV"
 else
-  echo "Deploying PR/$CODEBUILD_PULL_REQUEST to QA"
+  echo "==> Deploying PR/$CODEBUILD_PULL_REQUEST to QA"
 fi
+
 ```
