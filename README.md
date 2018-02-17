@@ -47,12 +47,13 @@ phases:
       - /usr/local/bin/git-tagger "${DEPLOY_KEY}"
   ```
 The `deploy` script would be part of your project, and would do whatever you need to build, test, and ship the code, based on the commit information available as environment variables thanks to `aws-codebuild-extras`.
-The `git-tagger` script will take the deploy key from the parameter store, and push a tag (based on the current timestamp).
+The `git-tagger` script will take the deploy key from the parameter store, and push a tag (based on the current timestamp) if a pull request is merged to master.
 
 As an example workflow, you could use a similar script to deploy to dev, qa and production based on the event type:
-- to DEV for a push to a branch
-- to QA if the current branch is part of a pull request
-- to PROD if a tag is pushed that matches the regex for CODEBUILD_GIT_TAG
+- It will build and deploy to DEV for a push to a branch
+- It will build and deploy to QA if the current branch is part of a pull request
+- It will tag a relase if a pull request is merged to master
+- Finally, it will deploy to PROD if a tag is pushed that matches the regex for CODEBUILD_GIT_TAG (so after a PR merge)
 
 
 ```bash
