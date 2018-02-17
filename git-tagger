@@ -1,5 +1,5 @@
 #!/bin/bash
-# Argument to the script is a valid ssh key for github
+# Argument to the script is a valid ssh key for github, create a tag if it's a push to master (and not a tag)
 
 if [ -n "$CODEBUILD_GIT_TAG" ] && [ "${CODEBUILD_PULL_REQUEST}" = "false" ] && [ "${CODEBUILD_GIT_BRANCH}" = "master" ]
 then
