@@ -11,8 +11,7 @@ Create an ssh deploy key for your repo called _repo_name_:
 ssh-keygen -t rsa -N "" -b 4096 -C "codebuild@example.com" -f repo-name_rsa
 ```
 This will generate a public (identified with `.pub` extension) and a private key.
-Please note that the email address you provide would be used to identify the tags in github, so you can use either your own, or one that is associated with your organization.
-Also note that each repository will need their own keys, unless you use a personal key or a "machine user" key (see the github explanation in the link above).
+Please note that each repository will need their own keys, unless you use a personal key or a "machine user" key (see the github explanation in the link above).
 
 Then, in your repository settings, click "add deploy key":
 
