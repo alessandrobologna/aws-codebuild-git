@@ -1,4 +1,6 @@
-# aws-codebuild-git
+![build-status](https://img.shields.io/docker/build/alessandrob/kops-kubectl.svg)
+![build-automated](https://img.shields.io/docker/automated/alessandrob/kops-kubectl.svg)
+# aws-codebuild-git 
 base ubuntu image + git and ssh
 
 ### What is it?
