@@ -2,9 +2,9 @@
 # Argument to the script is a valid ssh key for github, create a tag if it's a push to master (and not a tag)
 # Push a new tag for every commit to master
 
-if [ -z "$CODEBUILD_GIT_TAG" ] && [ "${CODEBUILD_PULL_REQUEST}" = "false" ] && [ "${CODEBUILD_GIT_BRANCH}" = "master" ]
+if [ -z "$CODEBUILD_GIT_TAG" ] && [ "${CODEBUILD_PULL_REQUEST}" = "false" ] && [ "${CODEBUILD_GIT_BRANCH}" = "${MAIN_BRANCH:-master}" ]
 then
-	GIT_TAG=v$(date "+%Y%m%d-%H%M%S")
+	GIT_TAG=${GIT_TAG:-v$(date "+%Y%m%d-%H%M%S")}
 	echo "==> Tagging this release with $GIT_TAG"
 	git config user.email "${CODEBUILD_GIT_AUTHOR_EMAIL}"
 	git config user.name "${CODEBUILD_GIT_AUTHOR}"
