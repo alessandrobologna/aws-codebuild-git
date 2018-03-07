@@ -1,7 +1,7 @@
 ![build-status](https://img.shields.io/docker/build/alessandrob/kops-kubectl.svg)
 ![build-automated](https://img.shields.io/docker/automated/alessandrob/kops-kubectl.svg)
 # aws-codebuild-git 
-base ubuntu image + git and ssh
+base image for AWS codebuild
 
 ### What is it?
 A simple docker image to facilitate deployments on AWS codebuild. It has already ssh-client installed, so that it can be used with a [deploy key](https://developer.github.com/v3/guides/managing-deploy-keys/) to push tags on successful merge of a pull request. It also conveniently add [aws-codebuild-extras](https://github.com/alessandrobologna/aws-codebuild-extras), forked from the [original](https://github.com/thii/aws-codebuild-extras)  to generate convenient environment variables for your deployment script. 
